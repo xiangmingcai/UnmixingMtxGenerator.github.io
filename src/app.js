@@ -22,16 +22,7 @@ let directoryHandle;
 let UnmixfileHandle;
 let csvArray;
 let ChannelNames;
-let A_Array;
-let A_pinv;
 
-let PrimaryValueList;
-let SecondaryValueList;
-let PSValueList;
-let selectedPrimaryValue;
-let selectedSecondaryValue;
-let selectedPSValue;
-let selectedRowIndex;
 
 let SCCfileHandle;
 let fcsArray = [];
@@ -48,20 +39,6 @@ let selectedSubset_fcsArray;
 let positivefcsArray;
 let negativefcsArray;
 
-let LefSig;
-let medianPosValue;
-let RawSig;
-let CorrectFactor_default;
-let CorrectFactor;
-
-let A_Array_corrected;
-let A_pinv_corrected;
-let fcsArrayPlotset_corrected;
-let x_val_corrected = '';
-let y_val_corrected = '';
-let selectedSubset_fcsArray_corrected;
-
-let csvArray_Output;
 let enable_density_plot = false;
 
 // Select fcs Data folder
@@ -185,7 +162,6 @@ document.getElementById('new-sig-setup-submit-button').addEventListener('click',
             populateFileDropdown(directoryHandle)
             //show step 2
             document.getElementById('scc-file-setup-div').style.display = 'block';
-
         }
 
     } catch (error) {
@@ -794,7 +770,6 @@ function normalizeToValue(sig, value) {
 }
 
 
-
 document.getElementById('save-button').addEventListener('click', () => {
     //normaliza final_sig
     const normalizationValue = document.getElementById('normalization-dropdown').value;
@@ -846,8 +821,6 @@ document.getElementById('save-button').addEventListener('click', () => {
     // Remove the link from the body
     document.body.removeChild(link);
 });
-
-
 
 
 function customLog(...args) {
