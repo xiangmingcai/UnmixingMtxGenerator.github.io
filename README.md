@@ -6,7 +6,7 @@ If you find it helpful, please remember to cite us in your work.
 
 Enjoy! 😉
 
-link to the webpage: [UMO](https://xiangmingcai.github.io/UnmixingMtxGenerator.github.io/)
+link to the webpage: [UMG](https://xiangmingcai.github.io/UnmixingMtxGenerator.github.io/)
 
 link to the instruction: [instruction](https://github.com/xiangmingcai/UnmixingMtxGenerator.github.io/blob/main/instruction.md)
 
