@@ -96,7 +96,7 @@ You may use the combination of letters, numbers, symbols, and spaces. However, I
 ### 2. select populations
 
 <p align="center">
-  <img src="./images/step13.jpg" />
+  <img src="./images/step21.jpg" />
 </p>
 
 Once you submit the signature names, you would see the fcs file setup part. Here you need to select the correct fcs file. You probably do not need all cells/beads in the file, so you may do sutset while reading the fcs file.
@@ -106,7 +106,7 @@ The UMG provide two methods for subset sampling. The first is "Random subset", w
 You could select positive and negative populations from different fcs file. So, do not worry that you may have no negative cells/beads if you use the "Max Subset by peak channel" option.
 
 <p align="center">
-  <img src="./images/step14.jpg" />
+  <img src="./images/step22.jpg" />
 </p>
 
 If you chooes the "Max Subset by peak channel" method, you could fetch all channels in the fcs file by clicking the "Fetch channels" button. Now you may select the peak channel.
@@ -114,7 +114,7 @@ If you chooes the "Max Subset by peak channel" method, you could fetch all chann
 You could also set the subset size. If you want to keep all cells/beads, you may use "Random Subset" and set a really high subset size number.
 
 <p align="center">
-  <img src="./images/step15.jpg" />
+  <img src="./images/step23.jpg" />
 </p>
 
 After reading the fcs file, you need to set up plot parameters for scatter plot, where you could select populations.
@@ -132,155 +132,96 @@ When you are done with gating, you would select a populaiton of cells, and set t
 It sounds complex. However, it is in fact simple and intuitive. I'm sure you will get me once you tried the UMG.
 ```
 
-You could find two plot buttons, "Create Scatter plot" and ""
-When yo click the 
+You could find two plot buttons, "Create Scatter plot" and "Re-plot with gated cells". The "Create Scatter plot" button will generate a scatter plot with all "plot cells". While the "Re-plot with gated cells" button will generate a scatter plot with gated cells.
 
-You probably want to do some gating first. If so, you could set the x and y axes and 
+You probably want to do some gating first. If so, you could set the x and y axes and click the "Create Scatter plot" button.
 
+```
+**plotly tools**
+The interactive scatter plot is made with [plotly.js](https://plotly.com/javascript/).  When your mouse hover over the plot, you will find some buttons on the right upper corner. You may use them to zoom in, zoom out, move, or download the plot as png. 
 
-
-
-
-
-
-You may scroll the table to confirm all rows are corrected and no empty rows or columns or anything weird.
-
-
-Now, you will see more options shown below. You need to set the "positive signature". For single-color cells control, it means the fluor used. 
-
-For multi-color sample, it means the positive axis of population with unmixing issue. For example, in the following figure, the population with unmixing issue was circled. We expect this population to be CD4+ and CD16-. So, we want to pull it towords the middle. Here, CD4 is the "positive signature".
+There is also a box selection and a lasso selection botton. You could use them to select cells
+```
 
 <p align="center">
-  <img src="./images/step12.jpg" width = 150/>
-</p>
-<p align="center">
-  <img src="./images/step13.jpg"/>
+  <img src="./images/step24.jpg" />
 </p>
 
-Then, you need to select a fcs file. It could be a single-color control cells file or multi-color sample file, depending on your scenario.
+Both axes are log10 scaled.
 
-Note: you need to switch the selected file once to see the following options.
-
-Before import the fcs file, we need to think about subseting cells. Because the UMO only needs **dozens** of representative cells, you do not need to import millions of cells with the risk of crushing the browser. 
-
-Here we offer two options, "Random Subset" and "Max Subset". "Random Subset" is simple sampling. The "Max Subset" will first identify the peak channel of positive signature based on the unmixing matrix, and choose the top cells with high signal on the peak channel.
-
-You also need to set the sample size. This number greatly impact the running speed of UMO. We recommend 50000 for the first try. You may repeat with different sample size afterward. 
-
-If the size of the fcs file is too big, and you keep getting crushed, you may consider export a smaller fcs file with other flow cytometry analysis program, like Flowjo, OMIQ, or FCS Express.
-
-Now, you may click "Read fcs file" button, and wait for 5~30 seconds. UMO will tell you when it is done and show some details.
-
-<p align="center">
-  <img src="./images/step14.jpg"/>
-</p>
-
-### 2. select populations
-
-Click the "Select populations" button, and you will see the following options.
-<p align="center">
-  <img src="./images/step21.jpg"/>
-</p>
-We do not need to use all imported cells for plot, so, here you could set a number for plotting.
-
-You need to select x and y axes for the scatter plot. Generate plot when you are ready.
-
-<p align="center">
-  <img src="./images/step22.jpg"/>
-</p>
-
-The purpose of this step is to select "positive populaiton" and "negative population". The "positive population" is a cluster of cells that **shifted the most** (most representative). 
-
-The "negative population" is a little bit more complex. For singel-color control cells, it could be any of these **less shifted** cells, so, it is ok to select probably any population from the one close to "positive population" to the one that is exactly negative at both axes. 
-
-For multi-color samples, a cluster of cells on the scatter plot could be highly complex and heterogeneity, because some could be positive for other fluors while the rest being negative. We want to make sure that the selected "positive population" and "negative population" only differ in these two plotted axes. We want these two populations are homogeneous in other axes. So, the "negative population" needs to be very very very close to the "positive population". As close as possible. 
-
-Here is example for singel-color control cells:
-<p align="center">
-  <img src="./images/step23.jpg"/>
-</p>
-
-Here is example for multi-color samples:
-<p align="center">
-  <img src="./images/step24.jpg"/>
-</p>
-
-The interactive scatter plot is made with [plotly.js](https://plotly.com/javascript/). Both axes are log10 scaled. When your mouse hover over the plot, you will find some buttons on the right upper corner. You may use them to zoom in, zoom out, move, or download the plot as png. 
-
-There is also a box selection and a lasso selection botton. You could use them to select population and click the "Set selected cells as shifted posotive population" button or "Set selected cells as negative population" to confirm your selection.
-
-<p align="center">
-  <img src="./images/step25.jpg"/>
-</p>
-
-It is also possible to do subpopulation before selecting the "positive population" and the "negative population".
-To do one subpopulation operation, you need to follow 3 steps:
+To do gating, you need to follow 3 steps:
 
 1. Select cells;
 2. Select new axes;
 3. click "Re-plot with selected cells" button.
-<p align="center">
-  <img src="./images/step26.jpg"/>
-</p>
-<p align="center">
-  <img src="./images/step27.jpg"/>
-</p>
-<p align="center">
-  <img src="./images/step28.jpg"/>
-</p>
-Sometimes you might accidently click re-plot button without select new axes. No worries, you could continue by selecting all cells and make new subpopulation plot.
+
+Sometimes you might accidently click re-plot button without select new axes. No worries, you could continue by selecting all cells and make new gating plot.
 
 Also, it is always ok to click "Create Scatter plot" button to restart selection.
 
-### 3. correct unmixing matrix
+When you finish gating and find the ideal population, you could click the "Set selected cells as posotive population" or "Set selected cells as negative population, if need" button to secure the selection.
 
-Finally, here you are! You may click the "Correct when you are ready!" button to see more options now.
-
-The UMO will calculate the difference between the "positive population" and the "negative population" and generate a "leftover signature" from the difference. The "leftover signature" will be used to correct the raw positive signature (CD4 in our case).
-
-Corrected_signature = Raw_signature + (Correct_factor * Leftover signature)
+If the selection is secured, you will find a new reminder line shown below the button.
 
 <p align="center">
-  <img src="./images/step31.jpg"/>
+  <img src="./images/step25.jpg" />
 </p>
 
-UMO will put a recommend Correct Factor in the input box. You may simply use it first and click "Submit" button to check the results. You can change the Correct Factor afterward if you are not satisfied with the results.
+After select the positive population, you may continue to select negative populaiton on the same scatter plot. You could also select another fcs file, read it, and draw new scatter plots. Your previously selected positive population will be loss as long as you did not fresh the whole webpage.
+
+
+### 3. generate signature
 
 <p align="center">
-  <img src="./images/step32.jpg"/>
+  <img src="./images/step31.jpg" />
 </p>
 
-Still, you could set the axes or do subpopulation like what you did in step 2.
-You will find the corrected results in the plot now. If you are not happy with the results, you may 
+The UMG provides two types of signatures. 
 
-1. Change the Correct Factor;
-2. Click "Submit" button;
-3. Click "Create Corrected Scatter plot".
+The first one is for fluors, which will subtract the signal of negative population from the signal of positive populaiton.
 
-to generate the new results. 
+*New signature = Positive population - Negative population*
 
-If you scroll down, you will find the line plot, which present the spectrum or raw positive signature and corrected positive signature. 
+The second one is for autofluorescence, which only needs positive populaiton.
+
+*New signature = Positive population*
+
+If you select the AF option, you will only be asked to select positive population
 
 <p align="center">
-  <img src="./images/step33.jpg"/>
+  <img src="./images/step32.jpg" />
 </p>
 
-This line plot provides a clear visualization of the extent of changes made by the UMO.
+In the first round of using UMG, you have no unmixing matrix provided. So you need to tell UMG which channels that you need. From the second round of using UMG, you will have a semi-finished unmixng matrix uploaded. UMG will check the matrix itself and select the channels needed for you. If there is any channel missed, you will see the worring when you upload the fcs file.
+
+You can not change the order of channels in the UMG. However, you could do this in Excel when you get your unmixing matrix file. It is also fine if you channge the order of channels in a semi-finished unmixing matrix csv file. The UMG will check the matrix and reorder the channels in fcs file when reading it.
+
+<p align="center">
+  <img src="./images/step33.jpg" />
+  <img src="./images/step34.jpg" />
+</p>
+
+Yes! by clilcking the "Calculate signature when you are ready!" button, you could have the signature calculated! You would find the spectrum visulized as a linchart. If you want to adjust a little bit, you do not need to restart the whole page at all. You could simply reselect cells above and set populaitons again.
+
+
 
 ### 4. save results
 
 <p align="center">
   <img src="./images/step41.jpg"/>
 </p>
+Now you could save the unmixing matrix with a new signature! 🥳
 
-With these two button, you could save the corrected unmixing matrix with exactly the same format. That helps if you want to correct another unmixing issue afterward.
+You need to select the normalization strategy for the new signature. If you are going to use the unmixng matrix in OMIQ, you may leave it as the "Normalize to 100" default option.  
 
-You can also save the log for your experiment records. **Please note that UMO is a static website, meaning everything you do with UMO is 100% local.** No data is sent out, and we do not store any user information. Therefore, if you want to save your process or results, you will need to do so manually.
+Although we have "No normalization" option, it is not recommend.
+
+You can also save the log for your experiment records. **Please note that UMG is a static website, meaning everything you do with UMO is 100% local.** No data is sent out, and we do not store any user information. Therefore, if you want to save your process or results, you will need to do so manually.
 
 ## Citation and Support
 
 If you find this tool helpful, please consider citing our work in your research. For more information, visit the GitHub project page.
 
-If you encounter any issues, feel free to report in the [github repository](https://github.com/xiangmingcai/UnmixingMtxOptimizer.github.io/issues). 
+If you encounter any issues, feel free to report in the [github repository](https://github.com/xiangmingcai/UnmixingMtxGenerator.github.io/issues). 
 
 Thank you for your support! 😊
