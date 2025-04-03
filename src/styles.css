@@ -19,7 +19,7 @@ h1, h2 {
 }
 
 button {
-  background-color: #e96d00;
+  background-color: #4c8dae;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -30,7 +30,7 @@ button {
 }
 
 button:hover {
-  background-color: #a84a21;
+  background-color: #3d3b4f;
 }
 
 input[type="file"], input[type="number"], select {
