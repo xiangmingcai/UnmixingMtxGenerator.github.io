@@ -214,9 +214,11 @@ Yes! by clilcking the "Calculate signature when you are ready!" button, you coul
 </p>
 Now you could save the unmixing matrix with a new signature! 🥳
 
-You need to select the normalization strategy for the new signature. If you are going to use the unmixng matrix in OMIQ, you may leave it as the "Normalize to 100" default option.  
+You need to select the normalization strategy for the new signature. If you are going to use the unmixng matrix in OMIQ, you may leave it as the "Normalize to 1" default option.  
 
 Although we have "No normalization" option, it is not recommend.
+
+If you want to normalize your matrix afterward, you may do so in Excel with a simple [formula](https://support.microsoft.com/en-us/office/overview-of-formulas-in-excel-ecfdc708-9162-49e8-b993-c311f47ca173) and [drag operation](https://support.microsoft.com/en-us/office/paste-options-8ea795b0-87cd-46af-9b59-ed4d8b1669ad).
 
 You can also save the log for your experiment records. **Please note that UMG is a static website, meaning everything you do with UMO is 100% local.** No data is sent out, and we do not store any user information. Therefore, if you want to save your process or results, you will need to do so manually.
 
