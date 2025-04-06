@@ -14,5 +14,5 @@ Note: UMG is a static website, meaning everything you do with UMO is 100% local.
 
 - **author  : Xiangming Cai**
 - **email   : x.cai@amsterdamumc.nl**
-- **time    : 2025/4/3**
-- **version: demo v0.1**
+- **time    : 2025/4/6**
+- **version: v1.0**
