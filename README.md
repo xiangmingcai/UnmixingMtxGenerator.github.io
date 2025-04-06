@@ -1,6 +1,6 @@
 # Unmixing Matrix Generator (UMG)
 
-This webtool, UMG, is designed to guide users to create the unmixing matrix for flow cytometry analysis. Users could use the single-color control fcs files to select populations and extract signature for fluorescences and autofluorescencec. 
+This webtool, UMG, as a part of [Unmixing Matrix Online web Toolkit for flow cytometry (UMOT)](https://github.com/xiangmingcai/UMOT), is designed to guide users to create the unmixing matrix for flow cytometry analysis. Users could use the single-color control fcs files to select populations and extract signature for fluorescences and autofluorescencec. 
 
 If you find it helpful, please remember to cite us in your work.
 
