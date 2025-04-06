@@ -32,7 +32,7 @@ If you find unmixing issues, you may consider optimize the unmixing matrix with 
 **Browser**: The UMG was tested with Microsoft Edge. So, probably Chrome also works. However, Firefox is not supported.
 
 **Hardware**:
-It depends on the fcs files that you are using. In general, a 8 GB RAM or higher is recommended.
+It depends on the fcs files that you are using. In general, a 16 GB RAM or higher is recommended.
 
 Internet connection is needed.
 
