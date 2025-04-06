@@ -7,8 +7,10 @@ import seedrandom from '../node_modules/seedrandom';
 let matrix_available;
 let PrimaryName;
 let SecondaryName;
+let peakChannel;
 let selectedSeusetChannelName;
 let selectedsigMethod = "PN";
+
 
 let pos_sig;
 let neg_sig;
@@ -232,7 +234,7 @@ async function fetchChannel() {
             arrayBuffer = null //remove arrayBuffer
             customLog("buffer: ", "finished.");
             
-            let fcs = new FCS({ dataFormat: 'asNumber', eventsToRead: -1}, buffer);
+            let fcs = new FCS({ dataFormat: 'asNumber', eventsToRead: 1000}, buffer);
             buffer = null //remove buffer
             customLog("fcs: ", "finished.");
             
@@ -252,9 +254,15 @@ async function fetchChannel() {
 
             fcsColumnNames = columnNames;
             customLog('Column Names:', fcsColumnNames);
+            
+            fcsArray = fcs.dataAsNumbers; 
             fcs = null; //remove fcs
+            //calcualte the peak channel
+            peakChannel = FindPeakChannel(fcsArray, fcsColumnNames)
+            
             //generate pulldown channel list
             populateChannelDropdown(fcsColumnNames) 
+            setDefaultDropdown("channel-dropdown",peakChannel) 
         };
         reader.readAsArrayBuffer(file);
     } else {
@@ -263,6 +271,17 @@ async function fetchChannel() {
     }
 }
 
+function setDefaultDropdown(elementid,defaultoption) {
+    const dropdown = document.getElementById(elementid);
+    const options = dropdown.options;
+    
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].value === defaultoption) {
+            options[i].selected = true;
+            break;
+        }
+    }
+}
 // Show Dropdown to select channel for subset
 async function populateChannelDropdown(fcsColumnNames) {
     const channelDropdown = document.getElementById('channel-dropdown');
@@ -378,6 +397,9 @@ async function readFCSFile() {
             //Generate axis pulldown for plots
             populateColumnDropdowns('x-dropdown',fcsColumnNames);
             populateColumnDropdowns('y-dropdown',fcsColumnNames);
+
+            peakChannel = FindPeakChannel(fcsArray, fcsColumnNames)
+            setDefaultDropdown("x-dropdown",peakChannel) 
             document.getElementById('plotset-size-input').value = SubsetSize//set default number
 
             document.getElementById('file-reading-reminder').innerText = 'Done reading the scc file!';
@@ -389,6 +411,27 @@ async function readFCSFile() {
         console.error('No file selected');
         customLog('No file selected');
     }
+}
+
+function FindPeakChannel(fcsArray, fcsColumnNames) {
+    const filteredColumnNames = fcsColumnNames.filter(name => {
+        return name.endsWith('-A') && !name.includes('SSC') && !name.includes('FSC');
+    });
+    // calculte all median
+    const medianValues = filteredColumnNames.map(columnName => {
+        const columnIndex = fcsColumnNames.indexOf(columnName);
+        const columnValues = fcsArray.map(row => row[columnIndex]);
+        return {
+            columnName: columnName,
+            median: median(columnValues)
+        };
+    });
+
+    // find the ColumnName of max medain
+    const maxMedianValue = max(...medianValues.map(item => item.median));
+    const peakChannel = medianValues.find(item => item.median === maxMedianValue).columnName;
+
+    return peakChannel;
 }
 
 function filterTopRows(fcsArray, fcsColumnNames, channelName, topN) {
@@ -633,6 +676,10 @@ document.getElementById('set-negative-button').addEventListener('click', async (
 //document.getElementById('checkbox-container').addEventListener('change', handleCheckboxChange);
 
 function populateCheckboxes() {
+    const filteredColumnNames = fcsColumnNames.filter(name => {
+        return name.endsWith('-A') && !name.includes('SSC') && !name.includes('FSC');
+    });
+    
     const container = document.getElementById('checkbox-container');
     fcsColumnNames.forEach(name => {
         const checkbox = document.createElement('input');
@@ -640,6 +687,12 @@ function populateCheckboxes() {
         checkbox.value = name;
         checkbox.id = name;
         checkbox.addEventListener('change', handleCheckboxChange);
+
+        // check if filteredColumnNames 
+        if (filteredColumnNames.includes(name)) {
+            checkbox.checked = true;
+        }
+        
 
         const label = document.createElement('label');
         label.htmlFor = name;
@@ -649,6 +702,15 @@ function populateCheckboxes() {
         container.appendChild(label);
         container.appendChild(document.createElement('br'));
     });
+
+    const checkboxes = document.querySelectorAll('#checkbox-container input[type="checkbox"]');
+    let selectedSigChannels = [];
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            selectedSigChannels.push(checkbox.value);
+        }
+    });
+    ChannelNames = selectedSigChannels
 }
 
 function handleCheckboxChange() {
@@ -824,7 +886,7 @@ document.getElementById('save-button').addEventListener('click', () => {
 
 
 function customLog(...args) {
-    const timestamp = new Date().toISOString(); // 获取当前时间的 ISO 字符串
+    const timestamp = new Date().toISOString(); // get ISO string of current time
     const logEntry = `[${timestamp}] ${args.join(' ')}`;
     logArray.push(logEntry);
     console.log.apply(console, [logEntry]); 

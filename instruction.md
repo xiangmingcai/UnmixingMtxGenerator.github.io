@@ -109,7 +109,7 @@ You could select positive and negative populations from different fcs file. So, 
   <img src="./images/step22.jpg" />
 </p>
 
-If you chooes the "Max Subset by peak channel" method, you could fetch all channels in the fcs file by clicking the "Fetch channels" button. Now you may select the peak channel.
+If you chooes the "Max Subset by peak channel" method, you could fetch all channels in the fcs file by clicking the "Fetch channels" button. **The UMG will find the peak channel for you.** If you do not like the found peak channel, you may select another one.
 
 You could also set the subset size. If you want to keep all cells/beads, you may use "Random Subset" and set a really high subset size number.
 
@@ -134,7 +134,7 @@ It sounds complex. However, it is in fact simple and intuitive. I'm sure you wil
 
 You could find two plot buttons, "Create Scatter plot" and "Re-plot with gated cells". The "Create Scatter plot" button will generate a scatter plot with all "plot cells". While the "Re-plot with gated cells" button will generate a scatter plot with gated cells.
 
-You probably want to do some gating first. If so, you could set the x and y axes and click the "Create Scatter plot" button.
+You probably want to do some gating first. If so, you could set the x and y axes and click the "Create Scatter plot" button. Also, The UMG will automaticly set the peak channel as the default x axis. 
 
 ```
 **plotly tools**
@@ -192,7 +192,9 @@ If you select the AF option, you will only be asked to select positive populatio
   <img src="./images/step32.jpg" />
 </p>
 
-In the first round of using UMG, you have no unmixing matrix provided. So you need to tell UMG which channels that you need. From the second round of using UMG, you will have a semi-finished unmixng matrix uploaded. UMG will check the matrix itself and select the channels needed for you. If there is any channel missed, you will see the worring when you upload the fcs file.
+In the first round of using UMG, you have no unmixing matrix provided. So you need to tell UMG which channels that you need. Of cause, the UMG will automaticly check some channels for you. Please double check if any channel is incorrect. 
+
+From the second round of using UMG, you will have a semi-finished unmixng matrix uploaded. UMG will check the matrix itself and select the channels needed for you. If there is any channel missed, you will see the worring when you upload the fcs file.
 
 You can not change the order of channels in the UMG. However, you could do this in Excel when you get your unmixing matrix file. It is also fine if you channge the order of channels in a semi-finished unmixing matrix csv file. The UMG will check the matrix and reorder the channels in fcs file when reading it.
 
