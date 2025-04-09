@@ -42,6 +42,7 @@ let positivefcsArray;
 let negativefcsArray;
 
 let enable_density_plot = false;
+let checkbox_generated_check = false;
 
 // Select fcs Data folder
 document.getElementById('select-folder').addEventListener('click', async () => {
@@ -399,7 +400,7 @@ async function readFCSFile() {
             populateColumnDropdowns('y-dropdown',fcsColumnNames);
 
             peakChannel = FindPeakChannel(fcsArray, fcsColumnNames)
-            setDefaultDropdown("x-dropdown",peakChannel) 
+            //setDefaultDropdown("x-dropdown",peakChannel) // The peak channel is not reliable
             document.getElementById('plotset-size-input').value = SubsetSize//set default number
 
             document.getElementById('file-reading-reminder').innerText = 'Done reading the scc file!';
@@ -621,7 +622,9 @@ document.getElementById('plot-button').addEventListener('click', async () => {
         document.getElementById('multi-channels-div').style.display = 'none';
     } else {
         document.getElementById('multi-channels-div').style.display = 'block';
-        populateCheckboxes()
+        if (!checkbox_generated_check){
+            populateCheckboxes()
+        }
     }
 
     document.getElementById('calculate-sig-div').style.display = 'block';
@@ -710,7 +713,8 @@ function populateCheckboxes() {
             selectedSigChannels.push(checkbox.value);
         }
     });
-    ChannelNames = selectedSigChannels
+    ChannelNames = selectedSigChannels;
+    checkbox_generated_check = true;
 }
 
 function handleCheckboxChange() {
