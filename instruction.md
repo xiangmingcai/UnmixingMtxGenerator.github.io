@@ -222,6 +222,13 @@ If you want to normalize your matrix afterward, you may do so in Excel with a si
 
 You can also save the log for your experiment records. **Please note that UMG is a static website, meaning everything you do with UMO is 100% local.** No data is sent out, and we do not store any user information. Therefore, if you want to save your process or results, you will need to do so manually.
 
+
+Of note: if you were to use OMIQ afterward, you need to paste it into the unmixing module of OMIQ. If you fail to import the unmixing matrix into the unmixing model due to "some channels were not found", you need to modify the "Primary" file feature first like this:
+
+<p align="center">
+  <img src="./images/step42.jpg"/>
+</p>
+
 ## Citation and Support
 
 If you find this tool helpful, please consider citing our work in your research. For more information, visit the GitHub project page.
